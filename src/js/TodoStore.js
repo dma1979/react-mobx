@@ -13,33 +13,31 @@ class Todo {
 }
 
 export class TodoStore {
-    @observable todos = ["read article", "watch video"]
+    @observable todos = []
     @observable filter = ""
 
     @computed get filteredTodos() {
         var matchesFilter = new RegExp(this.filter, "i")
         return this.todos
-            .filter(todo => !this.filter || matchesFilter.test(todo))
+            .filter(todo => !this.filter || matchesFilter.test(todo.value))
     }
 
-  createTodo(value) {
-    this.todos.push(value)
-  }
+    createTodo(value) {
+        this.todos.push(new Todo(value))
+    }
 
-    /*
-
-      clearComplete = () => {
+    clearComplete = () => {
         const incompleteTodos = this.todos.filter(todo => !todo.complete)
         this.todos.replace(incompleteTodos)
-      }*/
+    }
 }
 
 var store = window.store = new TodoStore()
 export default store
 //export default new TodoStore
 
+// debug only
 autorun(() => {
     console.log(store.filter)
-    console.log(store.todos[0])
 })
 

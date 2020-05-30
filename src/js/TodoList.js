@@ -11,41 +11,18 @@ export default class TodoList extends React.Component {
         }
     }
 
+    toggleComplete(todo) {
+        todo.complete = !todo.complete
+    }
+
     filter(e) {
         this.props.store.filter = e.target.value
     }
 
     render() {
-        const {filter, filteredTodos, todos} = this.props.store
+        const {filter, todos, filteredTodos, clearComplete} = this.props.store
 
         const todoList = filteredTodos.map((todo) => (
-            <li>{todo}</li>
-        ))
-
-        return (
-            <div>
-                <h1>TODOS</h1>
-                <input className="new" onKeyPress={this.createNew.bind(this)}/>
-                <input className="filter" value={filter} onChange={this.filter.bind(this)}/>
-                <ul>{todoList}</ul>
-            </div>
-        )
-    }
-
-    /*
-
-
-
-
-    toggleComplete(todo) {
-        todo.complete = !todo.complete
-    }
-
-    render() {
-
-     const {clearComplete, filter, filteredTodos, todos} = this.props.store
-
-        const todoLis = filteredTodos.map(todo => (
             <li key={todo.id}>
                 <input type="checkbox"
                        onChange={this.toggleComplete.bind(this, todo)}
@@ -54,14 +31,16 @@ export default class TodoList extends React.Component {
                 <span>{todo.value}</span>
             </li>
         ))
-        return <div>
-            <h1>todos</h1>
 
-            <input className="filter" value={filter} onChange={this.filter.bind(this)}/>
-            <ul>{todoLis}</ul>
-            <a href="#" onClick={clearComplete}>Clear Complete</a>
-        </div>
+        return (
+            <div>
+                <h1>TODOS</h1>
+                <input className="new" onKeyPress={this.createNew.bind(this)}/>
+                <input className="filter" value={filter} onChange={this.filter.bind(this)}/>
+                <ul>{todoList}</ul>
+                <a href="#" onClick={clearComplete}>Clear Complete</a>
+            </div>
+        )
     }
-        */
 
 }
