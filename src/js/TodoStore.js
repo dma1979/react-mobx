@@ -22,6 +22,10 @@ export class TodoStore {
             .filter(todo => !this.filter || matchesFilter.test(todo.value))
     }
 
+    @computed get filterResults() {
+        return this.filteredTodos.length + '/' + this.todos.length
+    }
+
     createTodo(value) {
         this.todos.push(new Todo(value))
     }
