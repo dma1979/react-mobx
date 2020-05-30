@@ -22,9 +22,11 @@ export class TodoStore {
             .filter(todo => !this.filter || matchesFilter.test(todo))
     }
 
-    /*  createTodo(value) {
-        this.todos.push(new Todo(value))
-      }
+  createTodo(value) {
+    this.todos.push(value)
+  }
+
+    /*
 
       clearComplete = () => {
         const incompleteTodos = this.todos.filter(todo => !todo.complete)
