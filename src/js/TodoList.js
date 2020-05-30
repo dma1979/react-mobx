@@ -3,15 +3,23 @@ import {observer} from "mobx-react"
 
 @observer
 export default class TodoList extends React.Component {
+
+    filter(e) {
+        this.props.store.filter = e.target.value
+    }
+
     render() {
-        const {todos} = this.props.store
-        const todoList = todos.map(todo => (
+        const {filter, filteredTodos, todos} = this.props.store
+
+        const todoList = filteredTodos.map((todo) => (
             <li>{todo}</li>
         ))
 
         return (
             <div>
                 <h1>TODOS</h1>
+                <div>{filter}</div>
+                <input className="filter" value={filter} onChange={this.filter.bind(this)}/>
                 <ul>{todoList}</ul>
             </div>
         )
@@ -25,9 +33,7 @@ export default class TodoList extends React.Component {
         }
     }
 
-    filter(e) {
-        this.props.store.filter = e.target.value
-    }
+
 
     toggleComplete(todo) {
         todo.complete = !todo.complete
